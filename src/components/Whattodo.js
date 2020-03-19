@@ -19,7 +19,7 @@ const styles = theme => ({
 		flexGrow: 1,
 		overflow: "hidden",
 		display: "flex",
-		// padding: theme.spacing(3)
+		padding: theme.spacing(3, 0)
 	},
 	share: {
 		marginTop: theme.spacing(3)
@@ -62,7 +62,7 @@ const styles = theme => ({
 		fontWeight: 300,
 		fontSize: "1.1rem",
 		color: "#525252",
-		lineHeight: "1.5rem",
+		lineHeight: "1.8rem",
 		[theme.breakpoints.down("xs")]: {
 			paddingRight: 0
 		},
@@ -73,7 +73,7 @@ const styles = theme => ({
 		color: "#b3b3b3"
 	},
 	textFooter: {
-		margin: theme.spacing(4, 0),
+		margin: theme.spacing(3, 0),
 		textAlign: "center"
 	}
 });

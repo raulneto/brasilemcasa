@@ -206,9 +206,9 @@ class Dashboard extends Component {
 											</div>
 											</div>
 										</Paper>
-										</Grid>
 									</Grid>
 								</Grid>
+							</Grid>
 						</Grid>
 					</div>
 				</div>

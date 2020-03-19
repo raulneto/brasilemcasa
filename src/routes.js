@@ -27,20 +27,20 @@ class Routes extends Component {
 		});
 		this.setState ({ estadosObj });
 	
-		// this.callApi()
-		//   .then(res => {
-		// 	if (Object.keys(res).length) {
-		// 		this.updateValues(res.data)
-		// 	}
-		// 	this.setState({
-		// 	  loading: false
-		// 	})
-		//   })
-		//   .catch(err => console.log(err));
+		this.callApi()
+		  .then(res => {
+			if (Object.keys(res).length) {
+				this.updateValues(res.data)
+			}
+			this.setState({
+			  loading: false
+			})
+		  })
+		  .catch(err => console.log(err));
 	  }
 	  
 	callApi = async () => {
-		const response = await fetch('data.json');
+		const response = await fetch('https://storage.googleapis.com/brasil-em-casa-443b3.appspot.com/d/data.json');
 		const body = await response.json();
 		if (response.status !== 200) throw Error(body.message);
 		return body;
