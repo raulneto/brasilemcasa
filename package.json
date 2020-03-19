@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://alexanmtz.github.io/material-sense",
-  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@material-ui/core": "^4.1.1",
     "@material-ui/icons": "^4.2.0",

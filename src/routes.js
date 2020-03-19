@@ -8,8 +8,6 @@ import Footer from './components/Footer'
 import Estados from "./components/common/Estados";
 import Topbar from "./components/Topbar";
 
-
-
 class Routes extends Component {
 	
 	state = {
@@ -19,65 +17,64 @@ class Routes extends Component {
 		loading: true
 	};
 	
-	  componentDidMount() {
+	componentDidMount() {
 		let estadosObj = {}
-	
 		Estados.map(e => {
 			return estadosObj[e.sigla] = {
 				estado: e.sigla,
 				qtd: 1
 			};
 		});
-	
 		this.setState ({ estadosObj });
 	
-		this.callApi()
-		  .then(res => {
-			if (Object.keys(res).length) {
-				this.updateValues(res.data)
-			}
-			this.setState({
-			  loading: false
-			})
-		  })
-		  .catch(err => console.log(err));
+		// this.callApi()
+		//   .then(res => {
+		// 	if (Object.keys(res).length) {
+		// 		this.updateValues(res.data)
+		// 	}
+		// 	this.setState({
+		// 	  loading: false
+		// 	})
+		//   })
+		//   .catch(err => console.log(err));
 	  }
 	  
-	  callApi = async () => {
-		const response = await fetch('/api/data');
+	callApi = async () => {
+		const response = await fetch('data.json');
 		const body = await response.json();
 		if (response.status !== 200) throw Error(body.message);
 		return body;
-	  };
+	};
 	
-	  updateValues(data) {
-		  let qtd = 0;
-		  let result = data.reduce((res, value) => {
-				const uf = Estados.find(e => e.nome === value.estado).sigla;
-				if (!res[uf]) {
-					res[uf] = {
-						qtd: 0,
-						estado: uf
-					}
+	updateValues(data) {
+		let qtd = 0;
+
+		let result = data.reduce((res, value) => {
+			const uf = Estados.find(e => e.nome === value.estado).sigla;
+			if (!res[uf]) {
+				res[uf] = {
+					qtd: 0,
+					estado: uf
 				}
-				res[uf].qtd += value.qtd;
-				qtd += value.qtd;
-				return res;
-			}, this.state.estadosObj);
-	
-			result = Object.keys(result)
-				.map(r => result[r])
-				.sort(function (a, b) {
-					if (a.estado > b.estado) {
-						return 1;
-					} else {
-						return -1;
-					}
-				});
-	
+			}
+			res[uf].qtd += value.qtd;
+			qtd += value.qtd;
+			return res;
+		}, this.state.estadosObj);
+
+		result = Object.keys(result)
+			.map(r => result[r])
+			.sort(function (a, b) {
+				if (a.estado > b.estado) {
+					return 1;
+				} else {
+					return -1;
+				}
+			});
+
 		this.setState({
-		  data: result,
-		  qtd
+			data: result,
+			qtd
 		});
 	}
 
@@ -86,9 +83,8 @@ class Routes extends Component {
 		return (
 			<HashRouter>
 				<ScrollToTop>
-					<Topbar />
+					<Topbar />	
 					<Switch>
-						{/* <Route exact path='/' component={ Main } /> */}
 						<Route exact path='/' component={() =>  <Dashboard data={data} qtd={qtd} loading={loading} /> } />
 						<Route exact path='/naopire' component={ Whattodo } />
 						<Route exact path='/hashtags' component={ Hashtags } />

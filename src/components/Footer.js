@@ -47,7 +47,7 @@ function Footer(props) {
 					</Grid>
 					<Grid item xs={24} className={classNames(classes.gridItem, classes.copyright)}>
 						<Typography variant="subtitle1" gutterBottom>
-							Com muito carinho  ❤ <a href="mailto:ficaemcasabrasil@gmail.com" className={classes.link}>ficaemcasabrasil@gmail.com</a>
+							Quer contribuir de alguma forma? ❤ <a href="mailto:ficaemcasabrasil@gmail.com" className={classes.link}>ficaemcasabrasil@gmail.com</a>
 						</Typography>
 					</Grid>
 				</Grid>
