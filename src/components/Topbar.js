@@ -116,7 +116,6 @@ class Topbar extends Component {
     if (this.props.location.pathname === "/home") {
       return 0;
 	}
-	console.log(this.props.location.pathname);
     if (this.props.location.pathname === "/naopire") {
       return 1;
     }

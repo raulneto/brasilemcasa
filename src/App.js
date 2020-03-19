@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
-import { ThemeProvider } from '@material-ui/styles';
+import React, { Component } from 'react'
+
+import { ThemeProvider } from '@material-ui/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
-import './index.css';
-import Routes from './routes'
 import { blue, indigo } from '@material-ui/core/colors'
+
+import { FirebaseProvider } from './providers/Firebase'
+import Routes from './routes'
+import './index.css';
 
 const theme = createMuiTheme({
   palette: {
@@ -27,12 +30,12 @@ const theme = createMuiTheme({
 class App extends Component {
   render() {
     return (
-      <div>
+      <FirebaseProvider>
         <ThemeProvider theme={theme}>
           <Routes />
         </ThemeProvider>
-      </div>
-    );
+      </FirebaseProvider>
+    )
   }
 }
 

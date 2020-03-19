@@ -1,5 +1,8 @@
-import React, { Component } from 'react'
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { useListVals } from 'react-firebase-hooks/database'
+
+import firebase from './providers/Firebase'
 import Dashboard from './components/Dashboard'
 import Hashtags from './components/Hashtags'
 import Whattodo from './components/Whattodo'
@@ -8,93 +11,64 @@ import Footer from './components/Footer'
 import Estados from "./components/common/Estados";
 import Topbar from "./components/Topbar";
 
-class Routes extends Component {
+function Routes() {
+	const fb = useContext(firebase)
+	const [snapshots, loading] = useListVals(fb.db.ref('data'))
 	
-	state = {
-		data: [],
-		estadosObj: {},
-		qtd: 0,
-		loading: true
-	};
+	const [data, setData] = useState([])
+	// const [estadosObj, setEstadosObj] = useState({})
+	const [qtd, setQtd] = useState(0)
+
+	useEffect(() => {
+		if (snapshots) {
+			console.log(snapshots)
+		}
+	}, [snapshots])
 	
-	componentDidMount() {
-		let estadosObj = {}
-		Estados.map(e => {
-			return estadosObj[e.sigla] = {
-				estado: e.sigla,
-				qtd: 1
-			};
-		});
-		this.setState ({ estadosObj });
-	
-		this.callApi()
-		  .then(res => {
-			if (Object.keys(res).length) {
-				this.updateValues(res.data)
-			}
-			this.setState({
-			  loading: false
-			})
-		  })
-		  .catch(err => console.log(err));
-	  }
-	  
-	callApi = async () => {
-		const response = await fetch('https://storage.googleapis.com/brasil-em-casa-443b3.appspot.com/d/data.json');
-		const body = await response.json();
-		if (response.status !== 200) throw Error(body.message);
-		return body;
-	};
-	
-	updateValues(data) {
-		let qtd = 0;
+	// const updateValues = (data) => {
+	// 	let _qtd = 0
+	// 	let estadosObj = {}
 
-		let result = data.reduce((res, value) => {
-			const uf = Estados.find(e => e.nome === value.estado).sigla;
-			if (!res[uf]) {
-				res[uf] = {
-					qtd: 0,
-					estado: uf
-				}
-			}
-			res[uf].qtd += value.qtd;
-			qtd += value.qtd;
-			return res;
-		}, this.state.estadosObj);
+	// 	let result = data.reduce((res, value) => {
+	// 		const uf = Estados.find(e => e.nome === value.estado).sigla;
+	// 		if (!res[uf]) {
+	// 			res[uf] = {
+	// 				_qtd: 0,
+	// 				estado: uf
+	// 			}
+	// 		}
+	// 		res[uf].qtd += value.qtd;
+	// 		_qtd += value.qtd;
+	// 		return res;
+	// 	}, estadosObj);
 
-		result = Object.keys(result)
-			.map(r => result[r])
-			.sort(function (a, b) {
-				if (a.estado > b.estado) {
-					return 1;
-				} else {
-					return -1;
-				}
-			});
+	// 	result = Object.keys(result)
+	// 		.map(r => result[r])
+	// 		.sort(function (a, b) {
+	// 			if (a.estado > b.estado) {
+	// 				return 1;
+	// 			} else {
+	// 				return -1;
+	// 			}
+	// 		});
 
-		this.setState({
-			data: result,
-			qtd
-		});
-	}
+	// 	setData(result)
+	// 	setQtd(_qtd)
+	// }
 
-	render() {
-		const { data, qtd, loading } = this.state;
-		return (
-			<BrowserRouter>
-				<ScrollToTop>
-					<Topbar />	
-					<Switch>
-						<Route exact path='/' component={() =>  <Dashboard data={data} qtd={qtd} loading={loading} /> } />
-						<Route exact path='/naopire' component={ Whattodo } />
-						<Route exact path='/hashtags' component={ Hashtags } />
-					</Switch>
-					<Footer />
-				</ScrollToTop>
-			</BrowserRouter>
-		)
-	}
-    
+	return (
+		<Router>
+			<ScrollToTop>
+				<Topbar />	
+				<Switch>
+					<Route exact path='/' component={() =>  <Dashboard data={data} qtd={qtd} loading={loading} /> } />
+					<Route exact path='/naopire' component={ Whattodo } />
+					<Route exact path='/hashtags' component={ Hashtags } />
+				</Switch>
+				<Footer />
+			</ScrollToTop>
+		</Router>
+	)
 }
 
 export default Routes;
