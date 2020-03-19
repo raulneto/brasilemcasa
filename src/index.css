@@ -19,7 +19,7 @@ code {
 }
 
 a:not([class]) {
-  /* border-bottom: 2px solid #8fd3e5; */
+  border-bottom: 2px solid #8fd3e5;
   text-decoration: none;
   color: #404040;
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;

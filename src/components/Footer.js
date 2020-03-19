@@ -11,7 +11,7 @@ const styles = theme => ({
 		overflow: "hidden",
 		display: "flex",
 		background:" #fff",
-		padding: "16px 0"
+		padding: "24px 0"
 		// padding: theme.spacing(3)
 	},
 	share: {
@@ -19,7 +19,7 @@ const styles = theme => ({
 	},
 	gridItem: {
 		width: "100%",
-		padding: theme.spacing(3),
+		padding: theme.spacing(2),
 		textAlign: "center"
 	},
 	copyright: {
@@ -29,7 +29,7 @@ const styles = theme => ({
 		fontSize: "1.250rem",
 		fontWeight: "700",
 		color: "#404040"
-	}
+	},
 });
 
 
@@ -39,6 +39,11 @@ function Footer(props) {
 		<div className={classes.root}>
 			<div className="wrapper">
 				<Grid container alignItems="center" justify="center" flexDirection="column">
+					<Grid item className={classes.gridItem}>
+						<Typography variant="subtitle1" gutterBottom className={classes.text}>
+							Espalhe a esperança <a href="https://www.instagram.com/ficaemcasabrasil/" rel="noopener noreferrer" target="_blank" className={classes.link}>@ficaemcasabrasil</a>
+						</Typography>
+					</Grid>
 					<Grid item className={classes.gridItem}>
 						<Typography variant="subtitle1" gutterBottom className={classes.text}>
 							Ah, e vamos levar essa mensagem ao máximo de pessoas possível? Bora divulgar nas suas redes sociais a hashtag <strong>#FicaEmCasaBrasil</strong>
