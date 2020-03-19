@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, HashRouter, Switch } from 'react-router-dom'
+import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import Dashboard from './components/Dashboard'
 import Hashtags from './components/Hashtags'
 import Whattodo from './components/Whattodo'
@@ -81,7 +81,7 @@ class Routes extends Component {
 	render() {
 		const { data, qtd, loading } = this.state;
 		return (
-			<HashRouter>
+			<BrowserRouter>
 				<ScrollToTop>
 					<Topbar />	
 					<Switch>
@@ -91,7 +91,7 @@ class Routes extends Component {
 					</Switch>
 					<Footer />
 				</ScrollToTop>
-			</HashRouter>
+			</BrowserRouter>
 		)
 	}
     
