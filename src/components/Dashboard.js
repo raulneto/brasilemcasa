@@ -100,19 +100,20 @@ class Dashboard extends Component {
         super();
         this.state = {
 			loading: true,
+			data: [],
+			qtd: 0
 		};
     }
 
 	componentDidUpdate(prevProps, prevState) {
-		const { data, qtd } = this.props;
-
-		if (prevProps.data !== data || prevProps.qtd !== qtd) {
-			this.setState({ loading: false });
+		const { data } = this.props;
+		if (prevProps.data !== data) {
+			this.setState({ loading: false, data: data.data, qtd: data.qtd });
 		}
 	}
 
 	render() {
-    	const { classes, qtd, data, loading } = this.props;
+		const { classes, loading, data } = this.props;
 
 		return (
 			<React.Fragment>
@@ -133,9 +134,6 @@ class Dashboard extends Component {
 											<Typography variant="h6" className={classes.pageTitle}>
 												A nossa luta é ficar em casa. A glória é o fim da pandemia.<br /> Vamos juntos nessa?
 											</Typography>
-											{/* <Typography component="p" className={classNames(classes.small, classes.paragraph)} gutterBottom>
-												(Mas cada um de sua casa, por favor!)
-											</Typography> */}
 											<Typography variant="body1" className={classes.paragraph}>
 												Seria o fim do mundo? A apocalipse zumbi? Não, ainda não. Respira! Mas, tudo pode acontecer se não mudarmos o nosso comportamento agora.<br /> O nosso objetivo aqui é <strong>conscientizar toda a população brasileira da importância de ficar em casa nesse momento de crise.</strong>
 											</Typography>
@@ -184,7 +182,7 @@ class Dashboard extends Component {
 														color={"secondary"}
 														gutterBottom
 													>
-														{qtd}
+														{data && data.qtd}
 													</Typography>
 												</div>
 											</div>
@@ -202,7 +200,7 @@ class Dashboard extends Component {
 												Por estado
 											</Typography>
 											<div className={classes.innerValue}>
-												<SimpleLineChart data={data} />
+												<SimpleLineChart data={data && data.data} />
 											</div>
 											</div>
 										</Paper>

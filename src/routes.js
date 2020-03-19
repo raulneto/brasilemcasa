@@ -15,18 +15,6 @@ function Routes() {
 	const fb = useContext(firebase)
 	const [snapshots, loading] = useObjectVal(fb.db.ref('data'))
 	
-	const [data, setData] = useState([])
-	// const [estadosObj, setEstadosObj] = useState({})
-	const [qtd, setQtd] = useState(0)
-
-	useEffect(() => {
-		console.log(snapshots);
-		if (snapshots) {
-			console.log(snapshots);
-			updateValues(snapshots);
-		}
-	}, [snapshots])
-	
 	const updateValues = (data) => {
 		let _qtd = 0
 		let estadosObj = {}
@@ -38,7 +26,6 @@ function Routes() {
 					qtd: 0,
 					estado: uf
 				}
-				console.log(res);
 			}
 			res[uf].qtd += value.qtd;
 			_qtd += value.qtd;
@@ -54,11 +41,10 @@ function Routes() {
 					return -1;
 				}
 			});
-		
-			console.log(result);
-			console.log(_qtd);
-		setData(result);
-		setQtd(_qtd);
+		return {
+			data: result,
+			qtd: _qtd
+		};
 	}
 
 	return (
@@ -66,7 +52,7 @@ function Routes() {
 			<ScrollToTop>
 				<Topbar />	
 				<Switch>
-					<Route exact path='/' component={() =>  <Dashboard data={data} qtd={qtd} loading={loading} /> } />
+					<Route exact path='/' component={() =>  <Dashboard data={snapshots && updateValues(snapshots)} loading={loading} /> } />
 					<Route exact path='/naopire' component={ Whattodo } />
 					<Route exact path='/hashtags' component={ Hashtags } />
 				</Switch>
