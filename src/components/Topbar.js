@@ -31,8 +31,11 @@ const styles = theme => ({
     display: "inline"
   },
   title: {
-	height: 160,
-	background: `url(${backgroundHeader}) no-repeat center center#f8f8f8`
+	  height: 160,
+    background: `url(${backgroundHeader}) no-repeat center center#f8f8f8`,
+    [theme.breakpoints.down("xs")]: {
+      height: 82
+    }
   },
   wrapTitle: {
 	  alignItems: "baseline",
@@ -40,9 +43,9 @@ const styles = theme => ({
 	  fontSize: "3rem",
 	  color: "#868686",
 	  fontWeight: 700,
-	  [theme.breakpoints.down("xs")]: {
-		fontSize: "1.5rem"
-	}
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.5rem"
+    }
   },
   flexTop: {
     display: "flex",
@@ -88,7 +91,11 @@ const styles = theme => ({
   tabItem: {
     paddingTop: 20,
     paddingBottom: 20,
-    minWidth: "auto"
+    minWidth: "auto",
+    [theme.breakpoints.down("xs")]: {
+      paddingTop: 12,
+      paddingBottom: 12,
+    }
   }
 });
 

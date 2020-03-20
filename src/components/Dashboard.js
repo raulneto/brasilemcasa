@@ -63,7 +63,10 @@ const styles = theme => ({
 		textAlign: "center"
 	},
 	block: {
-		padding: theme.spacing(2)
+		padding: theme.spacing(2),
+		[theme.breakpoints.up("xs")]: {
+			padding: theme.spacing(2, 0)
+		}
 	},
 	buttonBar: {
 		display: "flex"
@@ -135,17 +138,14 @@ class Dashboard extends Component {
 												A nossa luta é ficar em casa. A glória é o fim da pandemia.<br /> Vamos juntos nessa?
 											</Typography>
 											<Typography variant="body1" className={classes.paragraph}>
-												Seria o fim do mundo? O apocalipse zumbi? Não, ainda não. Respira! Mas, tudo pode acontecer se não mudarmos o nosso comportamento agora.<br /> O nosso objetivo aqui é <strong>conscientizar toda a população brasileira da importância de ficar em casa nesse momento de crise.</strong>
-											</Typography>
-											<Typography variant="body1" className={classes.paragraph}>
-												Nós vamos sair dessa, assim como já superamos tantos outros problemas que pareciam não ter fim. Porém, <strong>precisamos nos unir mais do que nunca para acabar com isso logo.</strong>
+												Seria o fim do mundo? O apocalipse zumbi? Não, ainda não. Respira! Mas, tudo pode acontecer se não mudarmos o nosso comportamento agora.
 											</Typography>
 											<Typography variant="body1" className={classes.paragraph}>
 												Você já está fazendo a sua parte? Então, nos diga clicando abaixo!
 											</Typography>
 											<div className={classes.btnForm}>
 												<Button
-														href="https://forms.gle/pAoJ78knPyf2rEGi7"
+													href="https://forms.gle/pAoJ78knPyf2rEGi7"
 													target="_blank"
 													color="primary"
 													variant="contained"
@@ -153,10 +153,13 @@ class Dashboard extends Component {
 													>
 													Eu estou em casa!
 												</Button>
-												<Typography variant="body1" className={classes.paragraph}>
-													Assim que isso acabar, vamos todos poder nos abraçar como se não houvesse amanhã! ❤
-												</Typography>
 											</div>
+											<Typography variant="body1" className={classes.paragraph}>
+												O nosso objetivo aqui é <strong>conscientizar toda a população brasileira da importância de ficar em casa nesse momento de crise.</strong> <br/>Nós vamos sair dessa, assim como já superamos tantos outros problemas que pareciam não ter fim. Porém, <strong>precisamos nos unir mais do que nunca para acabar com isso logo.</strong>
+											</Typography>
+											<Typography variant="body1" className={classes.paragraph}>
+												Assim que isso acabar, vamos todos poder nos abraçar como se não houvesse amanhã! ❤
+											</Typography>
 										</div>
 									</div>
 								</Grid>
